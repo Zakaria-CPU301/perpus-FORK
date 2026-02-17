@@ -1,5 +1,3 @@
-<?php include 'koneksi.php'; ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -105,7 +103,8 @@ a:hover {
         <h3>List Buku</h3>
         <table>
             <thead>
-                <tr>
+                <tr class="">
+                    <th>id</th> 
                     <th>No</th>
                     <th>Nama Buku</th>
                     <th>Pengarang</th>
@@ -116,20 +115,21 @@ a:hover {
             <tbody>
             <?php
             $no = 1;
-            $result = $conn->query("SELECT * FROM tb_buku ORDER BY id DESC");
-            while ($row = $result->fetch_assoc()):
+            require 'query_peminjaman.php';
+            foreach ($result as $row) :
             ?>
                 <tr>
+                    <td><?= $row['id'] ?></td>
                     <td><?= $no++ ?></td>
-                    <td><?= htmlspecialchars($row['nama_buku']) ?></td>
+                    <td><?= htmlspecialchars($row['judul']) ?></td>
                     <td><?= htmlspecialchars($row['pengarang']) ?></td>
-                    <td><?= htmlspecialchars($row['jenis_buku']) ?></td>
+                    <td><?= htmlspecialchars($row['nama_kategori']) ?></td>
                     <td>
                         <a href="edit.php?id=<?= $row['id'] ?>">Edit</a> |
                         <a href="hapus.php?id=<?= $row['id'] ?>" onclick="return confirm('Hapus data ini?')">Hapus</a>
                     </td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>

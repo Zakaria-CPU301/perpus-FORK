@@ -2,10 +2,15 @@
 include 'koneksi.php';
 
 $id = $_GET['id'];
-$data = $conn->query("SELECT * FROM tb_buku WHERE id = $id")->fetch_assoc();
+require 'query_peminjaman.php';
+foreach ($result as $row) {
+    if ($row['id'] == $id) {
+        $data = $row;
+        break;
+    }
+}
 ?>
 <style>
-
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(to right, #f0f2f0, #000c40);
@@ -23,6 +28,7 @@ $data = $conn->query("SELECT * FROM tb_buku WHERE id = $id")->fetch_assoc();
         align-items: center;
         height: 100vh;
     }
+
     form {
         background: white;
         padding: 40px;
@@ -76,6 +82,7 @@ $data = $conn->query("SELECT * FROM tb_buku WHERE id = $id")->fetch_assoc();
             opacity: 0;
             transform: scale(0.95);
         }
+
         to {
             opacity: 1;
             transform: scale(1);
@@ -87,9 +94,9 @@ $data = $conn->query("SELECT * FROM tb_buku WHERE id = $id")->fetch_assoc();
     <h2>Edit Data Buku</h2>
     <form action="proses_edit.php" method="post">
         <input type="hidden" name="id" value="<?= $id ?>">
-        <input type="text" name="nama_buku" value="<?= $data['nama_buku'] ?>"><br>
+        <input type="text" name="nama_buku" value="<?= $data['judul'] ?>"><br>
         <input type="text" name="pengarang" value="<?= $data['pengarang'] ?>"><br>
-        <input type="text" name="jenis_buku" value="<?= $data['jenis_buku'] ?>"><br>
+        <input type="text" name="jenis_buku" value="<?= $data['nama_kategori'] ?>"><br>
         <button type="submit">Update</button>
     </form>
 </div>
