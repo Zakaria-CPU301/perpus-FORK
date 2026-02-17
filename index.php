@@ -1,3 +1,6 @@
+<?php
+include 'auth.php';
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -85,6 +88,7 @@ a:hover {
     </style>
 </head>
 <body>
+    <a href="auth/logout.php" style="width: fit-content; padding: 10px 20px; background-color: #2ecc71; color: white; border: none; border-radius: 4px; cursor: pointer;">logout</a>
     <div class="container">
         <h1>Daftar Buku</h1>
 

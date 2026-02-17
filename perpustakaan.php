@@ -1,7 +1,7 @@
 <?php
 include_once 'koneksi.php';
-$sql = "SELECT * FROM tb_buku";
-$result = $conn->query($sql);
+require 'query_peminjaman.php';
+
 ?>
 <table>
     <thead>
@@ -12,13 +12,13 @@ $result = $conn->query($sql);
         </tr>
     </thead>
     <tbody>
-        <?php while ($row = $result->fetch_assoc()) { ?>
+        <?php foreach ($result as $row) : ?>
         <tr>
-            <td><?php echo $row['Nama_buku']; ?></td>
+            <td><?php echo $row['judul']; ?></td>
             <td><?php echo $row['pengarang']; ?></td>
-            <td><?php echo $row['Jenis_buku']; ?></td>
+            <td><?php echo $row['nama_kategori']; ?></td>
         </tr>
-        <?php } ?>
+        <?php endforeach; ?>
     </tbody>
 </table>
 <?php $conn->close(); ?>
